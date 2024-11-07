@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
-import { Mulish } from "next/font/google";
 import "./globals.css";
 import { ClerkProvider } from "@clerk/nextjs";
 import { dark } from "@clerk/themes";
+import { Mulish } from "next/font/google";
 
 const mulish = Mulish({
   subsets: ["latin-ext"],
