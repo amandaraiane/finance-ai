@@ -41,7 +41,7 @@ export const TRANSACTION_TYPE_OPTIONS = [
   },
 ];
 
-export const TRANSACTIONS_PAYMENT_METHOD_OPITIONS = [
+export const TRANSACTION_PAYMENT_METHOD_OPITIONS = [
   {
     value: TransactionPaymentMethod.BANK_SLIP,
     label:

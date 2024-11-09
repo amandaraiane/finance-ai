@@ -40,7 +40,7 @@ import {
 import {
   TRANSACTION_CATEGORY_OPTIONS,
   TRANSACTION_TYPE_OPTIONS,
-  TRANSACTIONS_PAYMENT_METHOD_OPITIONS,
+  TRANSACTION_PAYMENT_METHOD_OPITIONS,
 } from "../_constants/transactions";
 import { DatePicker } from "./ui/date-picker";
 
@@ -174,7 +174,7 @@ export function AddTransactionButton() {
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      {TRANSACTIONS_PAYMENT_METHOD_OPITIONS.map((option) => (
+                      {TRANSACTION_PAYMENT_METHOD_OPITIONS.map((option) => (
                         <SelectItem key={option.value} value={option.value}>
                           {option.label}
                         </SelectItem>
