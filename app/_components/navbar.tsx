@@ -15,7 +15,7 @@ export function Navbar() {
           className={
             pathname === "/"
               ? "font-extrabold text-primary"
-              : "text-muted-foreground"
+              : "text-muted-foreground hover:text-zinc-300"
           }
         >
           Dashboard
@@ -25,7 +25,7 @@ export function Navbar() {
           className={
             pathname === "/transactions"
               ? "font-extrabold text-primary"
-              : "text-muted-foreground"
+              : "text-muted-foreground hover:text-zinc-300"
           }
         >
           Transações
@@ -35,7 +35,7 @@ export function Navbar() {
           className={
             pathname === "/subscription"
               ? "font-extrabold text-primary"
-              : "text-muted-foreground"
+              : "text-muted-foreground hover:text-zinc-300"
           }
         >
           Assinatura
