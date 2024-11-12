@@ -1,9 +1,22 @@
+import { auth, clerkClient } from "@clerk/nextjs/server";
 import { Navbar } from "../_components/navbar";
+import { redirect } from "next/navigation";
 import { Card, CardContent, CardHeader } from "../_components/ui/card";
 import { CheckIcon, XIcon } from "lucide-react";
 import { AcquirePlanButton } from "./_components/acquire-plan-button";
+import { Badge } from "../_components/ui/badge";
+import { getCurrentMonthTransactions } from "../_data/get-current-month-transactions";
 
-export default function SubscriptionPage() {
+export default async function SubscriptionPage() {
+  const { userId } = await auth();
+  if (!userId) {
+    redirect("/login");
+  }
+
+  const user = await clerkClient().users.getUser(userId);
+  const currentMonthTransactions = await getCurrentMonthTransactions();
+  const hasPremiumPlan = user.publicMetadata.subscriptionPlan == "premium";
+
   return (
     <>
       <Navbar />
@@ -11,7 +24,7 @@ export default function SubscriptionPage() {
         <h1 className="text-2xl font-bold">Assinatura</h1>
 
         <div className="flex gap-6">
-          <Card className="w-[450px] bg-white bg-opacity-5">
+          <Card className="w-[450px]">
             <CardHeader className="border-b border-solid py-8">
               <h2 className="text-center text-2xl font-semibold">
                 Plano Básico
@@ -26,8 +39,7 @@ export default function SubscriptionPage() {
               <div className="flex items-center gap-2">
                 <CheckIcon className="text-primary" />
                 <p>
-                  Apenas 10 transações por mês ({/* currentMonthTransactions */}
-                  7/10)
+                  Apenas 10 transações por mês ({currentMonthTransactions}/10)
                 </p>
               </div>
               <div className="flex items-center gap-2">
@@ -37,13 +49,13 @@ export default function SubscriptionPage() {
             </CardContent>
           </Card>
 
-          <Card className="w-[450px] bg-white bg-opacity-5">
+          <Card className="w-[450px]">
             <CardHeader className="relative border-b border-solid py-8">
-              {/*        {hasPremiumPlan && (
+              {hasPremiumPlan && (
                 <Badge className="absolute left-4 top-12 bg-primary/10 text-primary">
                   Ativo
                 </Badge>
-              )} */}
+              )}
               <h2 className="text-center text-2xl font-semibold">
                 Plano Premium
               </h2>
