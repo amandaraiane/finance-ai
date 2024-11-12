@@ -42,59 +42,64 @@ export function AiReportButton({ month, hasPremiumPlan }: AiReportButtonProps) {
     }
   }
   return (
-    <Dialog>
+    <Dialog
+    /*       onOpenChange={(open) => { //limpar o relatório quando o usuário fechar o dialog
+        if (!open) {
+          setReport(null);
+        }
+      }} */
+    >
       <DialogTrigger asChild>
-        <Button className="font-bold" variant="ghost">
+        <Button variant="ghost" className="font-bold">
           Relatório IA
           <BotIcon />
         </Button>
       </DialogTrigger>
-      {hasPremiumPlan ? (
-        <DialogContent className="max-w-[600px]">
-          <DialogHeader>
-            <DialogTitle>Relatório IA</DialogTitle>
-            <DialogDescription>
-              Use inteligência artificial para gerar um relatório com insights
-              sobre suas finanças.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogDescription className="overflow-hidden">
-            <ScrollArea className="prose prose-h3:text-white prose-h4:text-white prose-strong:text-white h-auto max-h-[450px] text-white">
+      <DialogContent className="max-w-[600px]">
+        {hasPremiumPlan ? (
+          <>
+            <DialogHeader>
+              <DialogTitle>Relatório IA</DialogTitle>
+              <DialogDescription>
+                Use inteligência artificial para gerar um relatório com insights
+                sobre suas finanças.
+              </DialogDescription>
+            </DialogHeader>
+            <ScrollArea className="prose prose-h3:text-white prose-h4:text-white prose-strong:text-white max-h-[450px] text-white">
               <Markdown>{DUMMY_REPORT}</Markdown>
             </ScrollArea>
-          </DialogDescription>
-
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="ghost">Cancelar</Button>
-            </DialogClose>
-            <Button
-              disabled={reportIsLoading}
-              onClick={handleGenerateReportClick}
-            >
-              {reportIsLoading && <Loader2Icon className="animate-spin" />}
-              Gerar
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      ) : (
-        <DialogContent className="max-w-[600px]">
-          <DialogHeader>
-            <DialogTitle>Relatório IA</DialogTitle>
-            <DialogDescription>
-              Você precisa de um plano premium para gerar relatórios com IA.
-            </DialogDescription>
-          </DialogHeader>
-          <DialogFooter>
-            <DialogClose asChild>
-              <Button variant="ghost">Cancelar</Button>
-            </DialogClose>
-            <Button asChild>
-              <Link href="/subscription">Assinar plano premium</Link>
-            </Button>
-          </DialogFooter>
-        </DialogContent>
-      )}
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="ghost">Cancelar</Button>
+              </DialogClose>
+              <Button
+                onClick={handleGenerateReportClick}
+                disabled={reportIsLoading}
+              >
+                {reportIsLoading && <Loader2Icon className="animate-spin" />}
+                Gerar relatório
+              </Button>
+            </DialogFooter>
+          </>
+        ) : (
+          <>
+            <DialogHeader>
+              <DialogTitle>Relatório IA</DialogTitle>
+              <DialogDescription>
+                Você precisa de um plano premium para gerar relatórios com IA.
+              </DialogDescription>
+            </DialogHeader>
+            <DialogFooter>
+              <DialogClose asChild>
+                <Button variant="ghost">Cancelar</Button>
+              </DialogClose>
+              <Button asChild>
+                <Link href="/subscription">Assinar plano premium</Link>
+              </Button>
+            </DialogFooter>
+          </>
+        )}
+      </DialogContent>
     </Dialog>
   );
 }
