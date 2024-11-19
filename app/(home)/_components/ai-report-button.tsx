@@ -35,6 +35,7 @@ export function AiReportButton({ month, hasPremiumPlan }: AiReportButtonProps) {
       setReportIsLoading(true);
       const aiReport = await generateAiReport({ month });
       setReport(aiReport);
+      console.log(report);
     } catch (error) {
       console.error(error);
     } finally {
@@ -65,7 +66,7 @@ export function AiReportButton({ month, hasPremiumPlan }: AiReportButtonProps) {
                 sobre suas finanças.
               </DialogDescription>
             </DialogHeader>
-            <ScrollArea className="prose prose-h3:text-white prose-h4:text-white prose-strong:text-white max-h-[450px] text-white">
+            <ScrollArea className="prose max-h-[450px] text-white prose-h3:text-white prose-h4:text-white prose-strong:text-white">
               <Markdown>{DUMMY_REPORT}</Markdown>
             </ScrollArea>
             <DialogFooter>
